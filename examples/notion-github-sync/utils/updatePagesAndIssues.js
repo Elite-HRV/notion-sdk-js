@@ -54,6 +54,7 @@ module.exports = async function updatePagesAndIssues(pagesToUpdate) {
           title: task.properties.Name.title[0].plain_text,
           body: "id: " + task.id + "\r\n url: " + task.url,
           labels: labels,
+          state: task.properties["GitHub Status"].select.name,
         }
 
         if (!updatNotion) {
