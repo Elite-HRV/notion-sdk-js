@@ -6,6 +6,9 @@ const notion = new Client({ auth: process.env.NOTION_KEY })
 module.exports = function addIssueNumberIntoNotionTask(pageId, number, cardId) {
   return notion.pages.update({
     page_id: pageId,
-    properties: { "Issue Number": { number }, "Github cardId": { cardId } },
+    properties: {
+      "Issue Number": { number },
+      "Github cardId": { number: cardId },
+    },
   })
 }
