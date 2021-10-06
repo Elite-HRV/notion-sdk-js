@@ -24,25 +24,25 @@ module.exports = async function updatePagesAndIssues(pagesToUpdate) {
       pagesToUpdateBatch.map(async ({ pageId, card, ...issue }) => {
         const task = tasks.find(task => task.id == pageId)
 
-        const updatNotion =
-          card &&
-          (new Date(task.last_edited_time).getTime() <
-            new Date(issue.updatedAt).getTime() ||
-            new Date(task.last_edited_time).getTime() <
-              new Date(card.data.updated_at).getTime())
+        const updatNotion = false
+        //   card &&
+        //   (new Date(task.last_edited_time).getTime() <
+        //     new Date(issue.updatedAt).getTime() ||
+        //     new Date(task.last_edited_time).getTime() <
+        //       new Date(card.data.updated_at).getTime())
 
-        if (updatNotion) {
-          //update Notion
-          try {
-            await notion.pages.update({
-              page_id: pageId,
-              properties: getPropertiesFromIssue(issue),
-            })
-            console.log("task updated", issue.number)
-          } catch (e) {
-            console.log("error updating task " + issue.number, e)
-          }
-        }
+        // if (updatNotion) {
+        //   //update Notion
+        //   try {
+        //     await notion.pages.update({
+        //       page_id: pageId,
+        //       properties: getPropertiesFromIssue(issue),
+        //     })
+        //     console.log("task updated", issue.number)
+        //   } catch (e) {
+        //     console.log("error updating task " + issue.number, e)
+        //   }
+        // }
 
         //update Github
         //update issue
