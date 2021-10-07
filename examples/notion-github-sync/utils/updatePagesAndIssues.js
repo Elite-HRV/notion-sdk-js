@@ -44,6 +44,17 @@ module.exports = async function updatePagesAndIssues(pagesToUpdate) {
         //   }
         // }
 
+        //update Notion
+        try {
+          await notion.pages.update({
+            page_id: pageId,
+            properties: getPropertiesFromIssue(issue),
+          })
+          console.log("task updated", issue.number)
+        } catch (e) {
+          console.log("error updating task " + issue.number, e)
+        }
+
         //update Github
         //update issue
         const labels = getLabelsFromNotionTask(task)
@@ -54,7 +65,6 @@ module.exports = async function updatePagesAndIssues(pagesToUpdate) {
           title: task.properties.Name.title[0].plain_text,
           body: "id: " + task.id + "\r\n url: " + task.url,
           labels: labels,
-          state: task.properties["GitHub Status"].select.name,
         }
 
         if (!updatNotion) {

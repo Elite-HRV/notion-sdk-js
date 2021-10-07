@@ -12,6 +12,7 @@ const getNotionOperations = require("./utils/getNotionOperations")
 const getIssuesFromNotionDatabase = require("./utils/getIssuesFromNotionDatabase")
 const createIssuesInGithub = require("./utils/createIssuesInGithub")
 const getGitHubIssuesForRepository = require("./utils/getGitHubIssuesForRepository")
+const deleteIssuesInGithub = require("./utils/deleteIssuesInGithub")
 
 const { Client } = require("@notionhq/client")
 const dotenv = require("dotenv")
@@ -96,6 +97,8 @@ async function syncNotionDatabaseWithGitHub() {
   // Updates pages for existing issues.
   console.log(`\n${pagesToUpdate.length} issues to update in Notion.`)
   await updatePagesAndIssues(pagesToUpdate, tasks)
+
+  deleteIssuesInGithub(issues)
 
   // Success!
   console.log("\n✅ Notion database is synced with GitHub.")

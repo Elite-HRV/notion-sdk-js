@@ -23,9 +23,9 @@ module.exports = async function getGitHubIssuesForRepository() {
     for (const issue of data) {
       if (!issue.pull_request) {
         issues.push({
+          nodeId: issue.node_id,
           number: issue.number,
           title: issue.title,
-          state: issue.state,
           comment_count: issue.comments,
           url: issue.html_url,
           updatedAt: issue.updated_at,

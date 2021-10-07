@@ -7,7 +7,7 @@ module.exports = function getPropertiesFromIssue(issue) {
   const indexVars = require("../index")
   const assigneeMap = indexVars.assigneeMap
   const statusMap = indexVars.statusMap
-  const { number, state, comment_count, url, assignees, column_id } = issue
+  const { number, comment_count, url, assignees, column_id } = issue
 
   let assignee = []
   assignees.forEach((userLogin, key) => {
@@ -21,22 +21,19 @@ module.exports = function getPropertiesFromIssue(issue) {
     "Issue Number": {
       number,
     },
-    "GitHub Status": {
-      select: { name: state },
-    },
     "Number of Comments": {
       number: comment_count,
     },
     "Issue URL": {
       url,
     },
-    Assignee: {
-      people: assignee,
-    },
-    Status: {
-      select: {
-        id: Object.keys(statusMap).find(key => statusMap[key] == column_id),
-      },
-    },
+    // Assignee: {
+    //   people: assignee,
+    // },
+    // Status: {
+    //   select: {
+    //     id: Object.keys(statusMap).find(key => statusMap[key] == column_id),
+    //   },
+    // },
   }
 }
